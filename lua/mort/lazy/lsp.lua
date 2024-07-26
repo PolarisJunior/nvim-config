@@ -11,10 +11,14 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
-        "nvimdev/lspsaga.nvim"
+        -- "ray-x/lsp_signature.nvim",
+        -- "nvimdev/lspsaga.nvim"
     },
 
     config = function()
+        if vim.g.vscode then
+            return
+        end
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -30,7 +34,8 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                "pyright"
+                "pyright",
+                "elixirls"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -38,51 +43,37 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
-                zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
-                    })
-                    vim.g.zig_fmt_parse_errors = 0
-                    vim.g.zig_fmt_autosave = 0
-
-                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
-                                runtime = { version = "Lua 5.1" },
+                                -- runtime = { version = "Lua 5.1" },
                                 diagnostics = {
                                     globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
                                 }
                             }
                         }
                     }
-                end,
-                ["pyright"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.pyright.setup {
-                        capabilities = capabilities,
-                        root_dir = lspconfig.util.root_pattern(".git"),
-                        settings = {
-                            python = {
-                            }
-                        }
-
-                    }
                 end
+                -- ["pyright"] = function()
+                --     local lspconfig = require("lspconfig")
+                --     lspconfig.pyright.setup {
+                --         capabilities = capabilities,
+                --         root_dir = lspconfig.util.root_pattern(".git"),
+                --         settings = {
+                --             python = {
+                --             }
+                --         }
+                --
+                --     }
+                -- end
             }
         })
+
+        -- require("lspsaga").setup({})
+        -- require("lsp_signature").setup({})
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -98,12 +89,15 @@ return {
                 ['<enter>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For luasnip users.
-            }, {
-                { name = 'buffer' },
-            })
+            sources = cmp.config.sources(
+                {
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip'}
+                },
+                {
+                    { name = 'buffer' },
+                }
+            ),
         })
 
         vim.diagnostic.config({

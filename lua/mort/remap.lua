@@ -1,7 +1,16 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<C-i>", vim.lsp.buf.hover)
+-- This is bound to K by default
+-- vim.keymap.set("n", "<C-i>", vim.lsp.buf.hover)
+
+-- https://github.com/neovim/neovim/pull/28650/files
+-- https://neovim.io/doc/user/lsp.html#lsp-config
+-- At the time of writing these were just added back to neovim
+vim.keymap.set("n", "grn", vim.lsp.buf.rename)
+vim.keymap.set("n", "gra", vim.lsp.buf.code_action)
+vim.keymap.set("n", "grr", vim.lsp.buf.references)
+-- vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
 
 -- Move lines around while highlighted
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -25,4 +34,10 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 -- vim.keymap.set("n", "<leader>wh", "<cmd>split<CR>")
 -- vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>")
 -- vim.keymap.set("n", "<leader>wx", "<cmd>close<CR>")
+
+vim.keymap.set(
+    "n",
+    "<leader>ee",
+    "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+)
 
