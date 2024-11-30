@@ -1,3 +1,7 @@
+if vim.g.vscode then
+    return
+end
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -28,10 +32,6 @@ return {
     },
 
     config = function()
-        if vim.g.vscode then
-            return
-        end
-
         local lspconfig = require("lspconfig")
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
@@ -44,6 +44,7 @@ return {
             default_capabilities,
             cmp_nvim_lsp.default_capabilities()
         )
+
 
         local server_configs = {
             lua_ls = {
@@ -60,7 +61,8 @@ return {
                     }
                 }
             },
-            tsserver = {}
+            tsserver = {},
+            gopls = {}
         }
 
         mason.setup()

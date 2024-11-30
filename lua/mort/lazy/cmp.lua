@@ -1,3 +1,6 @@
+if vim.g.vscode then
+    return
+end
 
 return {
     "hrsh7th/nvim-cmp",
@@ -21,7 +24,11 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-n>"] = cmp.mapping.select_next_item(),
-                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                -- ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<CR>"] = cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Insert,
+                    select = true
+                }),
                 ["<C-l>"] = cmp.mapping(function()
                     if luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
@@ -37,7 +44,11 @@ return {
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "path" }
-            })
+            }),
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered()
+            }
         })
 
     end
