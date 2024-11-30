@@ -45,7 +45,6 @@ return {
             cmp_nvim_lsp.default_capabilities()
         )
 
-
         local server_configs = {
             lua_ls = {
                 settings = {
@@ -99,7 +98,7 @@ return {
                     vim.keymap.set("n", keys, func, { buffer = e.buf })
                 end
 
-                keymap("gD", vim.lsp.buf.declaration)
+                keymap("gd", vim.lsp.buf.declaration)
             end
         })
 

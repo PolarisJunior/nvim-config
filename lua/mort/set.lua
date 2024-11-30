@@ -1,3 +1,6 @@
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -26,3 +29,9 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
+
+vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
+
+-- Set maximum number of lines in completion
+vim.opt.pumheight = 12

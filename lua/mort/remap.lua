@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 -- Windowing
--- Actually just use built-in keys
+-- Actually just use built-in keys like C-W s, C-W v C-W q, C-W o
 -- vim.keymap.set("n", "<leader>wh", "<cmd>split<CR>")
 -- vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>")
 -- vim.keymap.set("n", "<leader>wx", "<cmd>close<CR>")
@@ -39,5 +39,15 @@ vim.keymap.set(
     "n",
     "<leader>ee",
     "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>cfg",
+    function()
+        local config_path = vim.fn.stdpath("config")
+        vim.cmd("edit " .. config_path)
+    end
+
 )
 

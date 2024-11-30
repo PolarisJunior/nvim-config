@@ -16,6 +16,7 @@ return {
         luasnip.config.setup({})
 
         cmp.setup({
+            completion = {},
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -24,6 +25,9 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-n>"] = cmp.mapping.select_next_item(),
+                ["<Tab>"] = cmp.mapping.select_next_item(),
+                ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+                -- ["<C-Space>"] = cmp.mapping.complete(),
                 -- ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                 ["<CR>"] = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Insert,
@@ -41,13 +45,16 @@ return {
                 end)
             }),
             sources = cmp.config.sources({
-                { name = "nvim_lsp" },
                 { name = "luasnip" },
+                { name = "nvim_lsp" },
                 { name = "path" }
             }),
             window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered()
+                completion = cmp.config.window.bordered({
+                    max_height = 10,
+                    max_width = 50
+                }),
+                documentation = cmp.config.window.bordered(),
             }
         })
 
