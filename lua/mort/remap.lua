@@ -10,6 +10,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "grn", vim.lsp.buf.rename)
 vim.keymap.set("n", "gra", vim.lsp.buf.code_action)
 vim.keymap.set("n", "grr", vim.lsp.buf.references)
+vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format({ async = true }) end)
 -- vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
 
 -- Move lines around while highlighted
@@ -39,6 +40,12 @@ vim.keymap.set(
     "n",
     "<leader>ee",
     "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+)
+
+vim.keymap.set(
+    "v",
+    "<leader>y",
+    '"+y'
 )
 
 vim.keymap.set(
