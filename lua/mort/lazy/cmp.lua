@@ -70,7 +70,10 @@ return {
                     compare.sort_text,
                     compare.length,
                     compare.order
-                }
+                },
+                -- Not sure what this does,
+                -- but took it from hrsh7th/nvim-cmp
+                priority_weight = 2
             }
         })
 
