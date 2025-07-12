@@ -60,8 +60,9 @@ return {
                     }
                 }
             },
-            tsserver = {},
-            gopls = {}
+            -- tsserver = {},
+            -- gopls = {},
+            pyright = {}
         }
 
         mason.setup()

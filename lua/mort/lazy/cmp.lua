@@ -3,6 +3,7 @@ if vim.g.vscode then
 end
 
 return {
+    -- :h nvim-cmp to get some hints
     "hrsh7th/nvim-cmp",
     dependencies = {
         "L3MON4D3/LuaSnip",
@@ -45,8 +46,9 @@ return {
                 end)
             }),
             sources = cmp.config.sources({
-                { name = "luasnip" },
                 { name = "nvim_lsp" },
+                { name = "buffer" },
+                { name = "luasnip" },
                 { name = "path" }
             }),
             window = {
@@ -55,7 +57,16 @@ return {
                     max_width = 50
                 }),
                 documentation = cmp.config.window.bordered(),
-            }
+            },
+            -- sorting = {
+            --     comparators = {
+            --         cmp.config.compare.exact,
+            --         cmp.config.compare.offset,
+            --         cmp.config.compare.score,
+            --         cmp.config.compare.recently_used,
+            --         cmp.config.compare.kind
+            --     }
+            -- }
         })
 
     end
