@@ -12,6 +12,7 @@ return {
     },
     config = function()
         local cmp = require("cmp")
+        local compare = require("cmp.config.compare")
         local luasnip = require("luasnip")
 
         luasnip.config.setup({})
@@ -58,15 +59,19 @@ return {
                 }),
                 documentation = cmp.config.window.bordered(),
             },
-            -- sorting = {
-            --     comparators = {
-            --         cmp.config.compare.exact,
-            --         cmp.config.compare.offset,
-            --         cmp.config.compare.score,
-            --         cmp.config.compare.recently_used,
-            --         cmp.config.compare.kind
-            --     }
-            -- }
+            sorting = {
+                -- From nvim-cmp-rust
+                comparators = {
+                    compare.offset,
+                    compare.exact,
+                    compare.score,
+                    compare.recently_used,
+                    compare.locality,
+                    compare.sort_text,
+                    compare.length,
+                    compare.order
+                }
+            }
         })
 
     end
