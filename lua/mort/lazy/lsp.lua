@@ -1,3 +1,4 @@
+
 if vim.g.vscode then
     return {}
 end
@@ -62,7 +63,9 @@ return {
             },
             -- tsserver = {},
             -- gopls = {},
-            pyright = {}
+            pyright = {},
+            clojure_lsp = {},
+            ruby_lsp = {}
         }
 
         mason.setup()
